@@ -22,7 +22,7 @@ export default function SoftwarePage() {
     if (loading) {
         softwareCards = <p>Chargement en cours...</p>;
     } else {
-        softwareCards = software.map(s => <SoftwareCard software={s}/>);
+        softwareCards = software.map(s => <SoftwareCard key={s.id} software={s}/>);
     }
 
     return (
