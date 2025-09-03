@@ -1,69 +1,16 @@
-# React + TypeScript + Vite
+# React Shortcuts
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## TODO
 
-Currently, two official plugins are available:
+- [ ] Afficher la liste des raccourcis clavier sur la page d'accueil.
+- [ ] Afficher la liste des logiciels sur la page Logiciels.
+- [ ] Afficher un message "Chargement en cours..." lorsque les données sont en cours de chargement.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Remarques**
 
-## Expanding the ESLint configuration
+- Les données doivent être récupérées via l'API. Pour cela, vous pouvez ré-utiliser le code (interfaces et fonctions) réalisées pendant le cours de TypeScript.
+- La récupération des données peut se faire de plusieurs manières :
+1. Charger les données dans un hook useEffect (pour éviter de recharger les données à chaque rendu du composant). Attention, la fonction en paramètre de useEffect ne peut pas être asynchrone et il faudra donc passer par une fonction intermédiaire.
+2. Utiliser le composant Suspense et le hook use (ajouté récemment dans React 18) pour gérer le chargement des données de manière plus moderne.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Vous pouvez utiliser l'une des deux approches (ou même les deux si vous le souhaitez puisqu'il y a deux chargement de données à gérer).
