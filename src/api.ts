@@ -1,5 +1,5 @@
-type ResourceType = "Category" | "Software" | "Shortcut";
-type ResourceSlug = "categories" | "software" | "shortcuts";
+type ResourceType = "Category" | "Software" | "Shortcut" | "MediaObject";
+type ResourceSlug = "categories" | "software" | "shortcuts" | "media_objects";
 
 interface Resource {
     "@context": string;
@@ -23,6 +23,7 @@ export interface Category extends Resource {
 export interface Software extends Resource {
     "@type": "Software";
     name: string;
+    logo: MediaObject;
 }
 
 export interface Shortcut extends Resource {
@@ -36,6 +37,11 @@ export interface Shortcut extends Resource {
     created_at: string;
     software: Software;
     categories: Category[];
+}
+
+export interface MediaObject extends Resource {
+    "@type": "MediaObject";
+    contentUrl: string;
 }
 
 
