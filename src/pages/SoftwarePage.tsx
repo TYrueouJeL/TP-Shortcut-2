@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
-import { getCollection } from "../api";
-import type { Software } from "../api";
+import { createResource, getCollection } from "../api";
+import type { Category, NewCategory, NewSoftware, Software } from "../api";
 import SoftwareCard from "../components/SoftwareCard";
 
 export default function SoftwarePage() {
     const [software, setSoftware] = useState<Software[]>([]);
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState('');
 
     async function fetchSoftware() {
         const software = await getCollection<Software>('software');
         setSoftware(software);
         setLoading(false);
+    }
+
+    async function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+        const newSoftware = await createResource<NewSoftware, Software>('software', { name: name });
+        setSoftware([ newSoftware, ...software ]);
+        setName('');
     }
 
     useEffect(() => {
@@ -28,6 +36,12 @@ export default function SoftwarePage() {
     return (
         <section>
             <h1>Liste des logiciels</h1>
+            
+            <form onSubmit={handleSubmit}>
+                <input type="text" value={name} onChange={event => setName(event.target.value)} placeholder="Nom du logiciel"/>
+                <button type="submit">Ajouter</button>
+            </form>
+
             {softwareCards}
         </section>
     );

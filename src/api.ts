@@ -15,15 +15,21 @@ interface Collection<T> {
     "hydra:member": T[];
 }
 
-export interface Category extends Resource {
-    "@type": "Category";
+export interface NewCategory {
     name: string;
 }
 
-export interface Software extends Resource {
-    "@type": "Software";
+export interface Category extends Resource, NewCategory {
+    "@type": "Category";
+}
+
+export interface NewSoftware {
     name: string;
-    logo: MediaObject;
+    logo?: MediaObject;
+}
+
+export interface Software extends Resource, NewSoftware {
+    "@type": "Software";
 }
 
 export interface Shortcut extends Resource {
@@ -55,4 +61,16 @@ export async function getCollection<T>(slug: ResourceSlug): Promise<T[]> {
     const response = await fetch(`https://shortcuts.api.pierre-jehan.com/${slug}`);
     const data: Collection<T> = await response.json();
     return data["hydra:member"];
+}
+
+export async function createResource<T, U>(slug: ResourceSlug, resource: T): Promise<U> {
+    const response = await fetch(`https://shortcuts.api.pierre-jehan.com/${slug}`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(resource)
+    });
+    const data: U = await response.json();
+    return data;
 }
