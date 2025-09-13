@@ -36,13 +36,15 @@ export default function SoftwarePage() {
     return (
         <section>
             <h1>Liste des logiciels</h1>
-            
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={handleSubmit} className="mb-1">
                 <input type="text" value={name} onChange={event => setName(event.target.value)} placeholder="Nom du logiciel"/>
                 <button type="submit">Ajouter</button>
             </form>
 
-            {softwareCards}
+            <div className="grid">
+                {softwareCards}
+            </div>
         </section>
     );
 }

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import SoftwarePage from './pages/SoftwarePage';
@@ -17,13 +16,15 @@ function App() {
   }
 
   return (
-    <main>
+    <div className="app-container">
 
       <Header onNavClick={p => setPage(p)}/>
 
-      {currentPage}
+      <main className="app-main">
+        {currentPage}
+      </main>
 
-    </main>
+    </div>
   )
 }
 

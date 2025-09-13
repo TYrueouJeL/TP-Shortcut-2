@@ -11,7 +11,7 @@ export default function ShortcutList() {
     const shortcutCards = shortcuts.map(s => <ShortcutCard key={s.id} shortcut={s}/>);
 
     return (
-        <div style={{ display: "grid", gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="grid">
             {shortcutCards}
         </div>
     );

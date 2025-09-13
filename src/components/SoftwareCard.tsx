@@ -13,8 +13,8 @@ export default function SoftwareCard({software}: Props) {
     }
 
     return (
-        <article style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-            <img src={imageUrl} alt={software.name} style={{ height: "35px" }}/>
+        <article className="card software-card">
+            <img src={imageUrl} alt={software.name}/>
             <h3>{software.name}</h3>
         </article>
     );

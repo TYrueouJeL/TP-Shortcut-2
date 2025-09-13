@@ -8,7 +8,7 @@ export default function ShortcutCard({ shortcut }: Props) {
     const categories = shortcut.categories.length > 0 ? shortcut.categories.map(c => c.name).join(", ") : "Aucune catégorie";
 
     return (
-        <article>
+        <article className="card shortcut-card">
             <h3>{shortcut.title}</h3>
             <p>{categories}</p>
             <p>{shortcut.description}</p>
