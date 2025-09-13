@@ -57,10 +57,32 @@ export async function getResource<T>(slug: ResourceSlug, id: number): Promise<T>
     return data;
 }
 
-export async function getCollection<T>(slug: ResourceSlug): Promise<T[]> {
-    const response = await fetch(`https://shortcuts.api.pierre-jehan.com/${slug}`);
-    const data: Collection<T> = await response.json();
-    return data["hydra:member"];
+export async function getCollection<T>(slugOrPage: ResourceSlug | number, categoryId?: number): Promise<T[]> {
+    if (typeof slugOrPage === "string") {
+        const response = await fetch(`https://shortcuts.api.pierre-jehan.com/${slugOrPage}`);
+        const data: Collection<T> = await response.json();
+        return data["hydra:member"];
+    } else if (categoryId === 0) {
+        const response = await fetch(`https://shortcuts.api.pierre-jehan.com/shortcuts?page=${slugOrPage}`);
+        const data: Collection<T> = await response.json();
+        return data["hydra:member"];
+    } else {
+        const response = await fetch(`https://shortcuts.api.pierre-jehan.com/shortcuts?page=${slugOrPage}&categories.id=${categoryId}`);
+        const data: Collection<T> = await response.json();
+        return data["hydra:member"];
+    }
+}
+
+export async function getPages(categoryId: number): Promise<number> {
+    if (categoryId === 0) {
+        const response = await fetch(`https://shortcuts.api.pierre-jehan.com/shortcuts?`);
+        const data = await response.json();
+        return Math.ceil(data["hydra:totalItems"] / 6);
+    } else {
+        const response = await fetch(`https://shortcuts.api.pierre-jehan.com/shortcuts?categories.id=${categoryId}`);
+        const data = await response.json();
+        return Math.ceil(data["hydra:totalItems"] / 6);
+    }
 }
 
 export async function createResource<T, U>(slug: ResourceSlug, resource: T): Promise<U> {

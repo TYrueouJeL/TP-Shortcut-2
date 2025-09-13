@@ -1,4 +1,4 @@
-import type { Software } from "../api";
+import type { Software } from "../../api.ts";
 
 interface Props {
     software: Software;

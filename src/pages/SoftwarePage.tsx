@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {type FormEvent, useEffect, useState} from "react";
 import { createResource, getCollection } from "../api";
 import type { NewSoftware, Software } from "../api";
-import SoftwareCard from "../components/SoftwareCard";
+import SoftwareCard from "../components/software/SoftwareCard.tsx";
 
 export default function SoftwarePage() {
     const [software, setSoftware] = useState<Software[]>([]);
@@ -14,7 +14,7 @@ export default function SoftwarePage() {
         setLoading(false);
     }
 
-    async function handleSubmit(event: React.FormEvent) {
+    async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         const newSoftware = await createResource<NewSoftware, Software>('software', { name: name });
         setSoftware([ newSoftware, ...software ]);
@@ -35,14 +35,14 @@ export default function SoftwarePage() {
 
     return (
         <section>
-            <h1>Liste des logiciels</h1>
+            <h1 className={'title'}>Liste des logiciels</h1>
 
             <form onSubmit={handleSubmit} className="mb-1">
                 <input type="text" value={name} onChange={event => setName(event.target.value)} placeholder="Nom du logiciel"/>
                 <button type="submit">Ajouter</button>
             </form>
 
-            <div className="grid">
+            <div>
                 {softwareCards}
             </div>
         </section>

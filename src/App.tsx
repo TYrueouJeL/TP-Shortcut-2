@@ -16,15 +16,13 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-
+    <>
       <Header onNavClick={p => setPage(p)}/>
 
-      <main className="app-main">
+      <main className={"container mx-auto px-4 flex items-center justify-between"}>
         {currentPage}
       </main>
-
-    </div>
+    </>
   )
 }
 
