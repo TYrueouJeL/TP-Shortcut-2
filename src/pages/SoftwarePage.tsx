@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createResource, getCollection } from "../api";
-import type { Category, NewCategory, NewSoftware, Software } from "../api";
+import type { NewSoftware, Software } from "../api";
 import SoftwareCard from "../components/SoftwareCard";
 
 export default function SoftwarePage() {
