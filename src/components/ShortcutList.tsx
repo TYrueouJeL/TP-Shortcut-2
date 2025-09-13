@@ -1,18 +1,35 @@
-import { use } from "react";
+import { useState, useEffect } from "react";
 import { getCollection } from "../api";
 import type { Shortcut } from "../api";
 import ShortcutCard from "./ShortcutCard";
 
-const getShortcutsPromise = getCollection<Shortcut>("shortcuts"); // The same Promise instance is reused across renders instead of creating new ones, which prevents the infinite loop. React automatically caches the result without needing the explicit cache() function.
-
 export default function ShortcutList() {
-    const shortcuts = use(getShortcutsPromise); // const shortcuts = use(getCollection<Shortcut>("shortcuts")); ===> infinite loop
+    const [shortcuts, setShortcuts] = useState<Shortcut[]|null>(null);
+    const [loading, setLoading] = useState(false);
 
-    const shortcutCards = shortcuts.map(s => <ShortcutCard key={s.id} shortcut={s}/>);
+    async function fetchShortcuts() {
+        setLoading(true);
+        const shortcuts = await getCollection<Shortcut>("shortcuts");
+        setShortcuts(shortcuts);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetchShortcuts();
+    }, []);
+
+    let content;
+    if (loading || shortcuts === null) {
+        content = <p>Chargement en cours...</p>;
+    } else if (shortcuts.length === 0) {
+        content = <p>Aucun raccourci trouvé.</p>;
+    } else {
+        content = shortcuts.map(s => <ShortcutCard key={s.id} shortcut={s}/>);
+    }
 
     return (
         <div className="grid">
-            {shortcutCards}
+            {content}
         </div>
     );
 }
