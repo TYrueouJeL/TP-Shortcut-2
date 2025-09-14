@@ -17,7 +17,7 @@ export default function HomePage() {
         setLoadingCategories(false);
     }
 
-    async function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+    function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         setCategoryId(Number(event.target.value));
         setPageNumber(1);
     }
@@ -105,7 +105,7 @@ export default function HomePage() {
                 {paging}
             </div>
 
-            <ShortcutList key={categoryId} categoryId={categoryId} pageNumber={pageNumber} />
+            <ShortcutList key={categoryId} categoryId={categoryId} pageNumber={pageNumber}/>
         </section>
     );
 }
