@@ -44,7 +44,7 @@ export default function HomePage() {
             <select
                 id={"category"}
                 name={"category"}
-                className="px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-500"
+                className="px-1 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-500"
                 disabled={true}>
                 <option>Chargement en cours...</option>
             </select>
@@ -53,7 +53,7 @@ export default function HomePage() {
             <select
                 id={"category"}
                 name={"category"}
-                className="px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-500"
+                className="px-1 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-500"
                 disabled={true}>
                 <option>Aucune catégorie</option>
             </select>
@@ -62,7 +62,7 @@ export default function HomePage() {
             <select
                 id={"category"}
                 name={"category"}
-                className="px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+                className="px-1 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
                 onChange={handleChange}>
                 <option key={0} value={0}>Toutes les catégories</option>
                 {categories.map(category => (

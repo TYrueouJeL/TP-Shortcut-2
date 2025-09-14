@@ -37,12 +37,12 @@ export default function SoftwarePage() {
         <section>
             <h1 className={'title'}>Liste des logiciels</h1>
 
-            <form onSubmit={handleSubmit} className="mb-1">
-                <input type="text" value={name} onChange={event => setName(event.target.value)} placeholder="Nom du logiciel"/>
-                <button type="submit">Ajouter</button>
+            <form onSubmit={handleSubmit}>
+                <input type="text" value={name} onChange={event => setName(event.target.value)} placeholder="Nom du logiciel" className={"px-1 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"}/>
+                <button type="submit" className={"button"}>Ajouter</button>
             </form>
 
-            <div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 my-4 ml-2 mr-2">
                 {softwareCards}
             </div>
         </section>
